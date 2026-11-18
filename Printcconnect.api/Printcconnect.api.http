@@ -1,0 +1,131 @@
+@Printcconnect.api_HostAddress = http://localhost:5214
+
+### 1. Register a new User
+POST {{Printcconnect.api_HostAddress}}/register
+Content-Type: application/json
+
+{
+  "email": "admin@printconnect.com",
+  "password": "Admin123!"
+}
+
+### 2. Login with that User
+POST {{Printcconnect.api_HostAddress}}/login
+Content-Type: application/json
+
+{
+  "email": "admin@printconnect.com",
+  "password": "Admin123!"
+}
+
+### 3. Create a new Company (Tenant)
+POST {{Printcconnect.api_HostAddress}}/companies
+Content-Type: application/json
+
+{
+  "company": {
+    "companyCode": "TENANT_A",
+    "companyName": "PrintConnect Shop A",
+    "isActive": true
+  },
+  "companyDb": {
+    "serverName": "(localdb)\\MSSQLLocalDB",
+    "databaseName": "PrintConnect_TenantA_DB",
+    "credentialKey": "TenantA",
+    "isActive": true
+  }
+### 4. Add a Product to Company 1 (Tenant A)
+POST {{Printcconnect.api_HostAddress}}/tenant/1/products
+Content-Type: application/json
+
+{
+  "productCode": "PROD002",
+  "productName": "PrintConnect Basic License",
+  "unitPrice": 500.00,
+  "isActive": true
+}   
+### 5. Get all Products for Company 1
+GET {{Printcconnect.api_HostAddress}}/tenant/1/products
+Accept: application/json    
+}
+
+
+### 6. Submit a Complaint for Company 1
+POST {{Printcconnect.api_HostAddress}}/tenant/1/inquiries
+Content-Type: application/json
+
+{
+  "customerName": "Juan Dela Cruz",
+  "emailAddress": "juan@example.com",
+  "subject": "Printer is broken",
+  "message": "The main printer in Branch 1 is not working.",
+  "type": "Complaint",
+  "status": "Open"
+}
+
+### 7. Get all Complaints for Company 1
+GET {{Printcconnect.api_HostAddress}}/tenant/1/inquiries
+Accept: application/json
+
+### 8. Add a Customer for Company 1
+POST {{Printcconnect.api_HostAddress}}/tenant/1/customers
+Content-Type: application/json
+
+{
+  "customerName": "Maria Clara",
+  "emailAddress": "maria@example.com",
+  "phoneNumber": "09123456789",
+  "address": "Manila, Philippines"
+}
+
+### 9. Get all Customers for Company 1
+GET {{Printcconnect.api_HostAddress}}/tenant/1/customers
+Accept: application/json
+
+### 12. Create an Order for Customer 1
+POST {{Printcconnect.api_HostAddress}}/tenant/1/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "items": [
+    { "productId": 1, "quantity": 2 }
+  ]
+}
+
+### 13. Get all Orders
+GET {{Printcconnect.api_HostAddress}}/tenant/1/orders
+Accept: application/json
+
+### 14. Add a Device to Master DB
+POST {{Printcconnect.api_HostAddress}}/devices
+Content-Type: application/json
+
+{
+  "companyId": 1,
+  "deviceCode": "DEV001",
+  "deviceName": "Main Cashier PC",
+  "isActive": true
+}
+
+### 15. Add a Supplier to Tenant 1
+POST {{Printcconnect.api_HostAddress}}/tenant/1/suppliers
+Content-Type: application/json
+
+{
+  "supplierCode": "SUP001",
+  "supplierName": "Davao Tech Supply",
+  "contactPerson": "Carlos Reyes",
+  "contactNumber": "09175551234",
+  "isActive": true
+}
+
+### 16. Add Inventory for Product 1
+POST {{Printcconnect.api_HostAddress}}/tenant/1/inventory
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantityOnHand": 50,
+  "reorderLevel": 10
+}

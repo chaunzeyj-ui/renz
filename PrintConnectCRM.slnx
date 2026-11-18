@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Printcconnect.api/Printcconnect.api.csproj" />
+  <Project Path="PrintConnect.domain/PrintConnect.domain.csproj" />
+  <Project Path="PrintConnect.infrastructure/PrintConnect.infrastructure.csproj" />
+  <Project Path="PrintConnect.WinForms/PrintConnect.WinForms.csproj" />
+</Solution>
